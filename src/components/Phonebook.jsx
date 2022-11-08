@@ -1,12 +1,14 @@
 import ContactForm from './ContactForm';
 import ContactList from './ContactList ';
 import Filter from './Filter';
-import { PhonebookTitle, ContactsTitle } from './Phonebook.styled';
+import { ContactsTitle, Form, ContactFilterForm } from './Phonebook.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts } from 'redux/contacts/contacts-selectors';
 import { getFilter } from 'redux/filter/filter-selectors';
 import { addContact, removeContact } from 'redux/contacts/contacts-slice';
 import { setFilter } from 'redux/filter/filter-slice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Phonebook() {
   const contacts = useSelector(getContacts);
@@ -15,13 +17,16 @@ export default function Phonebook() {
 
   const addPhoneContact = contact => {
     if (isDuplicate(contact)) {
-      return alert(`${contact.name} is already in contacts`);
+      toast.warn(`${contact.name} is already in contacts`);
+      return;
     }
+    toast('Contact added');
     const action = addContact(contact);
     dispatch(action);
   };
 
   const removePhoneContact = id => {
+    toast.success('Contact removed');
     const action = removeContact(id);
     dispatch(action);
   };
@@ -52,15 +57,16 @@ export default function Phonebook() {
   };
 
   return (
-    <div>
-      <PhonebookTitle>Phonebook</PhonebookTitle>
+    <Form>
       <ContactForm onSubmit={addPhoneContact} />
-      <ContactsTitle>Contacts</ContactsTitle>
-      <Filter filter={filter} handleChange={handleChange} />
-      <ContactList
-        contacts={getFilteredContacts()}
-        removeContact={removePhoneContact}
-      />
-    </div>
+      <ContactFilterForm>
+        <ContactsTitle>Contacts</ContactsTitle>
+        <Filter filter={filter} handleChange={handleChange} />
+        <ContactList
+          contacts={getFilteredContacts()}
+          removeContact={removePhoneContact}
+        />
+      </ContactFilterForm>
+    </Form>
   );
 }

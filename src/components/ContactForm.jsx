@@ -7,6 +7,8 @@ import {
   Input,
   Label,
   AddContactButton,
+  PhonebookTitle,
+  PhonebookContainer,
 } from './Phonebook.styled';
 
 const initialState = {
@@ -38,35 +40,38 @@ export default function ContactForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputWrapper>
-        <Label htmlFor={nameId}>Name</Label>
-        <Input
-          id={nameId}
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={state.name}
-          onChange={handleChange}
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <Label htmlFor={numberId}>Number</Label>
-        <Input
-          id={numberId}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={state.number}
-          onChange={handleChange}
-        />
-      </InputWrapper>
-      <AddContactButton type="submit">Add contact</AddContactButton>
-    </form>
+    <PhonebookContainer>
+      <PhonebookTitle>Phonebook</PhonebookTitle>
+      <form onSubmit={handleSubmit}>
+        <InputWrapper>
+          <Label htmlFor={nameId}>Name</Label>
+          <Input
+            id={nameId}
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            value={state.name}
+            onChange={handleChange}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Label htmlFor={numberId}>Number</Label>
+          <Input
+            id={numberId}
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={state.number}
+            onChange={handleChange}
+          />
+        </InputWrapper>
+        <AddContactButton type="submit">Add contact</AddContactButton>
+      </form>
+    </PhonebookContainer>
   );
 }
 

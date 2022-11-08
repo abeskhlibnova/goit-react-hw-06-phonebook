@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FilterTitle, FilterInput, Input } from './Phonebook.styled';
+import { FilterTitle, FilterInput } from './Phonebook.styled';
 
 export default function Filter({ filter, handleChange }) {
   return (
     <div>
       <FilterTitle>Find contacts by name</FilterTitle>
-      <Input
+      <FilterInput
         type="text"
         name="filter"
         value={filter}
         onChange={handleChange}
-        placeholder="Введіть ім'я для пошуку"
-      ></Input>
+        placeholder="Enter a name to search..."
+      ></FilterInput>
     </div>
   );
 }
